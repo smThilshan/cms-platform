@@ -1,0 +1,23 @@
+# Backend
+backend/vendor/
+backend/.env
+backend/storage/logs/*.log
+backend/storage/app/public/*
+backend/bootstrap/cache/*.php
+backend/.phpunit.result.cache
+
+# Frontend (added in Phase 6)
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# Mobile (added in bonus phase)
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+
+# OS
+.DS_Store
+Thumbs.db
