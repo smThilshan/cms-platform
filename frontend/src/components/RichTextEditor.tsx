@@ -1,6 +1,14 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { ClassicEditor, Bold, Italic, Underline, Link, List, Heading, Paragraph, Essentials } from 'ckeditor5';
+import {
+  ClassicEditor,
+  Bold, Italic, Underline, Strikethrough,
+  Link, List, ListProperties,
+  Heading, Paragraph, Essentials,
+  BlockQuote, HorizontalLine,
+  Undo,
+} from 'ckeditor5';
 import 'ckeditor5/ckeditor5.css';
+import './editor.css';
 
 interface Props {
   value: string;
@@ -9,14 +17,28 @@ interface Props {
 
 export default function RichTextEditor({ value, onChange }: Props) {
   return (
-    <CKEditor
-      editor={ClassicEditor}
-      config={{
-        plugins: [Essentials, Paragraph, Heading, Bold, Italic, Underline, Link, List],
-        toolbar: ['heading', '|', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList'],
-      }}
-      data={value}
-      onChange={(_, editor) => onChange(editor.getData())}
-    />
+    <div className="border border-gray-300 rounded-md overflow-hidden">
+      <CKEditor
+        editor={ClassicEditor}
+        config={{
+          licenseKey: 'GPL',
+          plugins: [
+            Essentials, Paragraph, Heading,
+            Bold, Italic, Underline, Strikethrough,
+            Link, List, ListProperties,
+            BlockQuote, HorizontalLine, Undo,
+          ],
+          toolbar: [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'strikethrough', '|',
+            'link', 'bulletedList', 'numberedList', '|',
+            'blockQuote', 'horizontalLine', '|',
+            'undo', 'redo',
+          ],
+        }}
+        data={value}
+        onChange={(_, editor) => onChange(editor.getData())}
+      />
+    </div>
   );
 }

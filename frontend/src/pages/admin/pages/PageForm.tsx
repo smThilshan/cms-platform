@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getPage, createPage, updatePage } from '../../../api/pages';
 import { getAdminMenu } from '../../../api/menu';
 import RichTextEditor from '../../../components/RichTextEditor';
+import ImagePicker from '../../../components/ui/ImagePicker';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
 
@@ -52,7 +53,7 @@ export default function PageForm() {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors({});
     const fd = new FormData();
@@ -67,7 +68,7 @@ export default function PageForm() {
   const flatMenuItems = (items: typeof menuData, depth = 0): { id: number; label: string }[] => {
     if (!items) return [];
     return items.flatMap(item => [
-      { id: item.id, label: '  '.repeat(depth) + item.title },
+      { id: item.id, label: '  '.repeat(depth) + item.title },
       ...flatMenuItems(item.children, depth + 1),
     ]);
   };
@@ -119,19 +120,11 @@ export default function PageForm() {
           </select>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Cover Image</label>
-          {pageData?.cover_image_url && !coverImage && (
-            <img src={pageData.cover_image_url} alt="Current cover" className="w-32 h-20 object-cover rounded-md mb-1" />
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={e => setCoverImage(e.target.files?.[0] ?? null)}
-            className="text-sm text-gray-600"
-          />
-          {errors.cover_image && <p className="text-xs text-red-500">{errors.cover_image}</p>}
-        </div>
+        <ImagePicker
+          currentUrl={pageData?.cover_image_url}
+          onChange={setCoverImage}
+          error={errors.cover_image}
+        />
 
         <div className="flex gap-3 pt-2">
           <Button type="submit" isLoading={mutation.isPending}>
