@@ -14,6 +14,8 @@ import MenuManager from './pages/admin/menu/MenuManager';
 import RoleList from './pages/admin/roles/RoleList';
 import RoleForm from './pages/admin/roles/RoleForm';
 import PrivilegeList from './pages/admin/privileges/PrivilegeList';
+import UserList from './pages/admin/users/UserList';
+import UserForm from './pages/admin/users/UserForm';
 import PublicLayout from './pages/public/PublicLayout';
 import PublicPage from './pages/public/PublicPage';
 import HomePage from './pages/public/HomePage';
@@ -48,6 +50,9 @@ createRoot(document.getElementById('root')!).render(
             <Route path="roles/create" element={<RoleForm />} />
             <Route path="roles/:id/edit" element={<RoleForm />} />
             <Route path="privileges" element={<PrivilegeList />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="users/create" element={<UserForm />} />
+            <Route path="users/:id/edit" element={<UserForm />} />
           </Route>
 
           <Route path="/" element={<PublicLayout />}>

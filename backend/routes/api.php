@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PrivilegeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Public\SiteController;
 use Illuminate\Support\Facades\Route;
@@ -50,4 +51,11 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/privileges/{privilege}',   [PrivilegeController::class, 'show'])->middleware('privilege:privileges.list');
     Route::post('/privileges/{privilege}',  [PrivilegeController::class, 'update'])->middleware('privilege:privileges.edit');
     Route::delete('/privileges/{privilege}', [PrivilegeController::class, 'destroy'])->middleware('privilege:privileges.delete');
+
+    // Users
+    Route::get('/users',          [UserController::class, 'index'])->middleware('privilege:users.list');
+    Route::post('/users',         [UserController::class, 'store'])->middleware('privilege:users.create');
+    Route::get('/users/{user}',   [UserController::class, 'show'])->middleware('privilege:users.list');
+    Route::post('/users/{user}',  [UserController::class, 'update'])->middleware('privilege:users.edit');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('privilege:users.delete');
 });

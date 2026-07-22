@@ -29,6 +29,12 @@ enum Privilege: string
     case PrivilegesEdit   = 'privileges.edit';
     case PrivilegesDelete = 'privileges.delete';
 
+    // Users
+    case UsersList   = 'users.list';
+    case UsersCreate = 'users.create';
+    case UsersEdit   = 'users.edit';
+    case UsersDelete = 'users.delete';
+
     public function description(): string
     {
         return match($this) {
@@ -49,6 +55,10 @@ enum Privilege: string
             self::PrivilegesCreate => 'Create privileges',
             self::PrivilegesEdit   => 'Edit privileges',
             self::PrivilegesDelete => 'Delete privileges',
+            self::UsersList   => 'List users',
+            self::UsersCreate => 'Create users',
+            self::UsersEdit   => 'Edit users',
+            self::UsersDelete => 'Delete users',
         };
     }
 

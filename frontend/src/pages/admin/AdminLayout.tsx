@@ -37,6 +37,9 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
         <PrivilegeGate privilege="privileges.list">
           <NavLink to="/admin/privileges" className={navLink} onClick={onNavClick}>Privileges</NavLink>
         </PrivilegeGate>
+        <PrivilegeGate privilege="users.list">
+          <NavLink to="/admin/users" className={navLink} onClick={onNavClick}>Users</NavLink>
+        </PrivilegeGate>
       </nav>
 
       <div className="p-3 border-t border-gray-200">
