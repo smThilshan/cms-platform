@@ -37,7 +37,7 @@ export default function PageForm() {
       setTitle(pageData.title);
       setBody(pageData.body);
       setStatus(pageData.status);
-      setMenuItemId(pageData.menu_item_id);
+      setMenuItemId(pageData.menu_item?.id ?? '');
     }
   }, [pageData]);
 
@@ -121,7 +121,7 @@ export default function PageForm() {
         </div>
 
         <ImagePicker
-          currentUrl={pageData?.cover_image_url}
+          currentUrl={pageData?.cover_image}
           onChange={setCoverImage}
           error={errors.cover_image}
         />

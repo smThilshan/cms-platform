@@ -25,8 +25,8 @@ export interface Page {
   slug: string;
   body: string;
   status: 'draft' | 'published';
-  cover_image_url: string | null;
-  menu_item_id: number;
+  cover_image: string | null;
+  menu_item: { id: number; title: string; slug: string } | null;
   created_at: string;
   updated_at: string;
 }

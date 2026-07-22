@@ -17,9 +17,9 @@ export default function PublicPage() {
 
   return (
     <article className="max-w-prose">
-      {data.cover_image_url && (
+      {data.cover_image && (
         <img
-          src={data.cover_image_url}
+          src={data.cover_image}
           alt={data.title}
           className="w-full h-56 object-cover rounded-xl mb-8"
         />
