@@ -31,11 +31,12 @@ export default function RoleList() {
       </div>
 
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
               <th className="text-left px-4 py-3 font-medium text-gray-600">Name</th>
-              <th className="text-left px-4 py-3 font-medium text-gray-600">Slug</th>
+              <th className="text-left px-4 py-3 font-medium text-gray-600 hidden sm:table-cell">Slug</th>
               <th className="text-left px-4 py-3 font-medium text-gray-600">Privileges</th>
               <th className="px-4 py-3" />
             </tr>
@@ -44,7 +45,7 @@ export default function RoleList() {
             {data?.map(role => (
               <tr key={role.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3 font-medium text-gray-900">{role.name}</td>
-                <td className="px-4 py-3 text-gray-500">{role.slug}</td>
+                <td className="px-4 py-3 text-gray-500 hidden sm:table-cell">{role.slug}</td>
                 <td className="px-4 py-3 text-gray-500">{role.privileges.length} privileges</td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-2">
@@ -69,6 +70,7 @@ export default function RoleList() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

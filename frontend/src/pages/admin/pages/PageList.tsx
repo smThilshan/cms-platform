@@ -29,7 +29,7 @@ export default function PageList() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Pages</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Pages</h1>
         <PrivilegeGate privilege="pages.create">
           <Link to="/admin/pages/create">
             <Button>New Page</Button>
@@ -38,57 +38,59 @@ export default function PageList() {
       </div>
 
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-gray-50 border-b border-gray-200">
-            <tr>
-              <th className="text-left px-4 py-3 font-medium text-gray-600">Title</th>
-              <th className="text-left px-4 py-3 font-medium text-gray-600">Slug</th>
-              <th className="text-left px-4 py-3 font-medium text-gray-600">Status</th>
-              <th className="px-4 py-3" />
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            {data?.data.map(p => (
-              <tr key={p.id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 font-medium text-gray-900">{p.title}</td>
-                <td className="px-4 py-3 text-gray-500">{p.slug}</td>
-                <td className="px-4 py-3">
-                  <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium ${
-                    p.status === 'published'
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-gray-100 text-gray-600'
-                  }`}>
-                    {p.status}
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center justify-end gap-2">
-                    <PrivilegeGate privilege="pages.edit">
-                      <Link to={`/admin/pages/${p.id}/edit`}>
-                        <Button variant="secondary" size="sm">Edit</Button>
-                      </Link>
-                    </PrivilegeGate>
-                    <PrivilegeGate privilege="pages.delete">
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => handleDelete(p.id, p.title)}
-                        isLoading={deleteMutation.isPending && deleteMutation.variables === p.id}
-                      >
-                        Delete
-                      </Button>
-                    </PrivilegeGate>
-                  </div>
-                </td>
-              </tr>
-            ))}
-            {data?.data.length === 0 && (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <td colSpan={4} className="px-4 py-8 text-center text-gray-400">No pages yet.</td>
+                <th className="text-left px-4 py-3 font-medium text-gray-600">Title</th>
+                <th className="text-left px-4 py-3 font-medium text-gray-600 hidden sm:table-cell">Slug</th>
+                <th className="text-left px-4 py-3 font-medium text-gray-600">Status</th>
+                <th className="px-4 py-3" />
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {data?.data.map(p => (
+                <tr key={p.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-3 font-medium text-gray-900">{p.title}</td>
+                  <td className="px-4 py-3 text-gray-500 hidden sm:table-cell">{p.slug}</td>
+                  <td className="px-4 py-3">
+                    <span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium ${
+                      p.status === 'published'
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-gray-100 text-gray-600'
+                    }`}>
+                      {p.status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center justify-end gap-2">
+                      <PrivilegeGate privilege="pages.edit">
+                        <Link to={`/admin/pages/${p.id}/edit`}>
+                          <Button variant="secondary" size="sm">Edit</Button>
+                        </Link>
+                      </PrivilegeGate>
+                      <PrivilegeGate privilege="pages.delete">
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => handleDelete(p.id, p.title)}
+                          isLoading={deleteMutation.isPending && deleteMutation.variables === p.id}
+                        >
+                          Delete
+                        </Button>
+                      </PrivilegeGate>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              {data?.data.length === 0 && (
+                <tr>
+                  <td colSpan={4} className="px-4 py-8 text-center text-gray-400">No pages yet.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {data && data.meta.last_page > 1 && (
