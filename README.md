@@ -13,6 +13,7 @@ A headless CMS built with **Laravel 12** (API) and **React 19 + Vite** (frontend
 | Frontend | React 19 · Vite · TypeScript · Tailwind CSS v4 |
 | State | TanStack Query (server) · React Context (auth) |
 | Editor | CKEditor 5 |
+| Mobile | Flutter 3 · flutter_bloc · go_router (see `mobile/`) |
 
 ---
 
