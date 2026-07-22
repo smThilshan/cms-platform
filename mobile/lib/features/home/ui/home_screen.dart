@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   separatorBuilder: (_, _) => const SizedBox(height: 12),
                   itemBuilder: (context, index) => PageCard(
                     page: pages[index],
-                    onTap: () => context.go('/page/${pages[index].slug}'),
+                    onTap: () => context.push('/page/${pages[index].slug}'),
                   ),
                 ),
               ),

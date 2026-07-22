@@ -6,7 +6,6 @@ import 'package:cms_mobile/core/router/app_router.dart';
 import 'package:cms_mobile/core/theme/app_theme.dart';
 import 'package:cms_mobile/features/home/cubit/home_cubit.dart';
 import 'package:cms_mobile/features/home/data/repositories/page_repository.dart';
-import 'package:cms_mobile/features/page_detail/cubit/page_detail_cubit.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -18,19 +17,18 @@ class CmsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dio = DioClient.instance;
-    final pageRepository = PageRepository(dio);
+    final pageRepository = PageRepository(DioClient.instance);
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => HomeCubit(pageRepository)),
-        BlocProvider(create: (_) => PageDetailCubit(pageRepository)),
-      ],
-      child: MaterialApp.router(
-        title: 'CMS Platform',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
-        routerConfig: AppRouter.router,
+    return RepositoryProvider.value(
+      value: pageRepository,
+      child: BlocProvider(
+        create: (_) => HomeCubit(pageRepository),
+        child: MaterialApp.router(
+          title: 'CMS Platform',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          routerConfig: AppRouter.router,
+        ),
       ),
     );
   }
